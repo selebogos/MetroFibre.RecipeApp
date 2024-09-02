@@ -18,11 +18,11 @@ export class FoodService {
     this.domain=environment.domain;
   }
 
-  public Make(category: RequestModel):any {
+  public Make(ingredients: RequestModel[]):any {
 
     try {
       
-      return this.http.post<any>(this.domain+this.baseUrllFood,category).pipe(
+      return this.http.post<any>(this.domain+this.baseUrllFood,ingredients).pipe(
         map(result => {
 
           return result;

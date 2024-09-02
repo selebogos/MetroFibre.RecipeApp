@@ -6,8 +6,6 @@ import { Injectable } from "@angular/core";
 
 export class RequestModel {
 
-    public result!:string;
-    // public result!:string;
-    // public result!:string;
-    // public result!:string;
+    name!:string;
+    quantity!:number;
 }
