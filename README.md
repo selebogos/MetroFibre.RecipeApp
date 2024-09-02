@@ -1,6 +1,6 @@
 # MetroFibreApp
 
-#Please Install .NET8 and/Or Angular installed
+#Please Install .NET8 
 #Please use Visual Studio
 
 # You can display the results using the Console
