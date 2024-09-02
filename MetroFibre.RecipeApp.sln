@@ -1,0 +1,75 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34511.84
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Backend", "Backend", "{73E2B9C6-7EA5-459E-9A25-B69A382920FB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{3F159410-9B63-479B-9CD1-6A7E235459D8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetroFibre.RecipeApp.Data", "MetroFibreApp.Data\MetroFibre.RecipeApp.Data.csproj", "{A21D8DA4-AD01-4466-BDB0-9A5DF027F5D3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroFibre.RecipeApp.Services", "MetroFibreApp.Services\MetroFibre.RecipeApp.Services.csproj", "{CA2C952A-B2D0-4DA8-A56F-10D82016D90E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroFibre.RecipeApp.Tests", "MetroFibrApp.Tests\MetroFibre.RecipeApp.Tests.csproj", "{0748F667-A13D-4BA8-AC42-B9EF649C34B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroFibre.RecipeApp.Console", "MetroFibreApp.Console\MetroFibre.RecipeApp.Console.csproj", "{8659CE43-D0EB-421C-8BED-6C53DD229C2C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetroFibre.RecipeApp.API", "MetroFibre.RecipeApp.API\MetroFibre.RecipeApp.API.csproj", "{2BA35E8B-EF0B-4B2C-8656-83AA7DD0F478}"
+	ProjectSection(ProjectDependencies) = postProject
+		{CA2C952A-B2D0-4DA8-A56F-10D82016D90E} = {CA2C952A-B2D0-4DA8-A56F-10D82016D90E}
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MetroFibre.RecipeApp.Web", "MetroFibre.RecipeApp.Web", "{474CEB73-F294-4965-B6CB-FE3A85A253C0}"
+EndProject
+Project("{54A90642-561A-4BB1-A94E-469ADEE60C69}") = "RecipeWebApp", "RecipeWebApp\RecipeWebApp.esproj", "{47A671CF-D491-46B4-A494-2092AA313285}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A21D8DA4-AD01-4466-BDB0-9A5DF027F5D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A21D8DA4-AD01-4466-BDB0-9A5DF027F5D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A21D8DA4-AD01-4466-BDB0-9A5DF027F5D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A21D8DA4-AD01-4466-BDB0-9A5DF027F5D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CA2C952A-B2D0-4DA8-A56F-10D82016D90E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CA2C952A-B2D0-4DA8-A56F-10D82016D90E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CA2C952A-B2D0-4DA8-A56F-10D82016D90E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CA2C952A-B2D0-4DA8-A56F-10D82016D90E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0748F667-A13D-4BA8-AC42-B9EF649C34B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0748F667-A13D-4BA8-AC42-B9EF649C34B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0748F667-A13D-4BA8-AC42-B9EF649C34B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0748F667-A13D-4BA8-AC42-B9EF649C34B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8659CE43-D0EB-421C-8BED-6C53DD229C2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8659CE43-D0EB-421C-8BED-6C53DD229C2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8659CE43-D0EB-421C-8BED-6C53DD229C2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8659CE43-D0EB-421C-8BED-6C53DD229C2C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2BA35E8B-EF0B-4B2C-8656-83AA7DD0F478}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2BA35E8B-EF0B-4B2C-8656-83AA7DD0F478}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2BA35E8B-EF0B-4B2C-8656-83AA7DD0F478}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2BA35E8B-EF0B-4B2C-8656-83AA7DD0F478}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47A671CF-D491-46B4-A494-2092AA313285}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47A671CF-D491-46B4-A494-2092AA313285}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47A671CF-D491-46B4-A494-2092AA313285}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{47A671CF-D491-46B4-A494-2092AA313285}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47A671CF-D491-46B4-A494-2092AA313285}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47A671CF-D491-46B4-A494-2092AA313285}.Release|Any CPU.Deploy.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A21D8DA4-AD01-4466-BDB0-9A5DF027F5D3} = {73E2B9C6-7EA5-459E-9A25-B69A382920FB}
+		{CA2C952A-B2D0-4DA8-A56F-10D82016D90E} = {73E2B9C6-7EA5-459E-9A25-B69A382920FB}
+		{0748F667-A13D-4BA8-AC42-B9EF649C34B8} = {73E2B9C6-7EA5-459E-9A25-B69A382920FB}
+		{8659CE43-D0EB-421C-8BED-6C53DD229C2C} = {3F159410-9B63-479B-9CD1-6A7E235459D8}
+		{2BA35E8B-EF0B-4B2C-8656-83AA7DD0F478} = {73E2B9C6-7EA5-459E-9A25-B69A382920FB}
+		{474CEB73-F294-4965-B6CB-FE3A85A253C0} = {3F159410-9B63-479B-9CD1-6A7E235459D8}
+		{47A671CF-D491-46B4-A494-2092AA313285} = {474CEB73-F294-4965-B6CB-FE3A85A253C0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD8D6077-0F77-4A11-A39A-CE3E619D2C70}
+	EndGlobalSection
+EndGlobal
