@@ -17,13 +17,8 @@ namespace MetroFibre.RecipeApp.API.Controllers
             var items=_mapper.Map<List<IngredientDto>>(incredients);
            var response=await _foodCreatorService.PrepareFoodAsync(items);
 
-            return Ok(new{message= response});
+            return Ok(response);
         }
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //    int a = 0;
-        //}
     }
 
     

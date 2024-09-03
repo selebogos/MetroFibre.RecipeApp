@@ -57,46 +57,82 @@ export class AppComponent {
     this.spinnerService.show();
     let details = this.insertForm.value;
 
-    if (details.cucumber === null || details.cucumber === undefined || details.cucumber === "" || details.cucumber == " " || details.cucumber < 0) {
+    if (details.cucumber === "" || details.cucumber === " ") {
+      this.spinnerService.hide();
+      Swal.fire("Recipe Optimizer", "Please provide the Qty for cucumber Ingredient", "error");
+      return;
+    }
+    else if(details.cucumber < 0){
       this.spinnerService.hide();
       Swal.fire("Recipe Optimizer", "Please provide the Qty for cucumber Ingredient", "error");
       return;
     }
 
-
-    if (details.olives === null || details.olives === undefined || details.olives === "" || details.olives === " " || details.olives < 0) {
+    if (details.olives === "" || details.olives === " ") {
+      this.spinnerService.hide();
+      Swal.fire("Recipe Optimizer", "Please provide the Qty for olives Ingredients", "error");
+      return;
+    }
+    else if(details.olives < 0){
       this.spinnerService.hide();
       Swal.fire("Recipe Optimizer", "Please provide the Qty for olives Ingredients", "error");
       return;
     }
 
-
-    if (details.lettuce === null || details.lettuce === undefined || details.lettuce === "" || details.lettuce === " " || details.lettuce < 0) {
+    if (details.lettuce === "" || details.lettuce === " ") {
+      this.spinnerService.hide();
+      Swal.fire("Recipe Optimizer", "Please provide the Qty for lettuce Ingredients", "error");
+      return;
+    }
+    else if(details.lettuce < 0){
       this.spinnerService.hide();
       Swal.fire("Recipe Optimizer", "Please provide the Qty for lettuce Ingredients", "error");
       return;
     }
 
 
-    if (details.meat === null || details.meat === undefined || details.meat === "" || details.meat === " " || details.meat < 0) {
+    if (details.meat === "" || details.meat === " ") {
       this.spinnerService.hide();
       Swal.fire("Recipe Optimizer", "Please provide the Qty for meat Ingredients", "error");
       return;
     }
-    if (details.tomato === null || details.tomato === undefined || details.tomato === "" || details.tomato === " " || details.tomato < 0) {
+    else if(details.meat < 0){
+      this.spinnerService.hide();
+      Swal.fire("Recipe Optimizer", "Please provide the Qty for meat Ingredients", "error");
+      return;
+    }
+
+    if (details.tomato === "" || details.tomato === " ") {
+      this.spinnerService.hide();
+      Swal.fire("Recipe Optimizer", "Please provide the Qty for tomato Ingredients", "error");
+      return;
+    }
+    else if(details.tomato < 0){
       this.spinnerService.hide();
       Swal.fire("Recipe Optimizer", "Please provide the Qty for tomato Ingredients", "error");
       return;
     }
 
-    if (details.cheese === null || details.cheese === undefined || details.cheese === "" || details.cheese === " " || details.cheese < 0) {
+    if (details.cheese === "" || details.cheese === " ") {
       this.spinnerService.hide();
       Swal.fire("Recipe Optimizer", "Please provide the Qty for cheese Ingredients", "error");
       return;
     }
-    if (details.dough === null || details.dough === undefined || details.dough === "" || details.dough === " " || details.dough < 0) {
+    else if(details.cheese < 0){
+      this.spinnerService.hide();
+      Swal.fire("Recipe Optimizer", "Please provide the Qty for cheese Ingredients", "error");
+      return;
+    }
+
+
+    if (details.dough === "" || details.dough === " ") {
       this.spinnerService.hide();
       Swal.fire("Recipe Optimizer", "Please provide the Qty for dough Ingredients", "error");
+      return;
+    }
+    else if(details.dough < 0){
+      this.spinnerService.hide();
+      Swal.fire("Recipe Optimizer", "Please provide the Qty for cheese Ingredients", "error");
       return;
     }
 
@@ -133,12 +169,27 @@ export class AppComponent {
     ingredients.push(requestModel);
 
 
+    requestModel = new RequestModel();
+    requestModel.name = "meat";
+    requestModel.quantity = details.meat;
+    ingredients.push(requestModel);
+
+
     this.foodService.Make(ingredients)?.subscribe((result: any) => {
       debugger;
       this.spinnerService.hide();
+      let sum=0;
+      console.log(result);
+      let html='<ul>'
+      result.forEach((x:any)=>{
+        sum+=x.servings*x.qty;
+         html+='<li>'+x.recipe+' feeds '+x.servings+' ,Qty: '+x.qty +'</li>'
+      });
+      html+='<ul>';
 
-    
-      Swal.fire("Recipe Optimizer", result.message.results, "success");
+      html+='<br/>Total number of people that can eat is '+sum+'<p>';
+      
+      Swal.fire("Recipe Optimizer", html, "success");
       return;
 
 

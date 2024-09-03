@@ -9,6 +9,6 @@ namespace MetroFibre.RecipeApp.Services.Abstractions
 {
     public interface IFoodCreatorService
     {
-        Task<PreparationResultDto> PrepareFoodAsync(List<IngredientDto> incredients);
+        Task<List<PreparationResultDto>> PrepareFoodAsync(List<IngredientDto> incredients);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MetroFibre.RecipeApp.Services.Abstractions;
 using MetroFibre.RecipeApp.Services.DTOs;
+using MetroFibre.RecipeApp.Services.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,42 +9,41 @@ using System.Threading.Tasks;
 
 namespace MetroFibre.RecipeApp.Services.FoodCreator
 {
-    public class FoodCreatorService: IFoodCreatorService
+    public class FoodCreatorService(IRecipeService _recipeService) : IFoodCreatorService
     {
-        private readonly IRecipeService _recipeService;
-        private readonly IIngredientService _incredientService;
         private List<RecipeDto> _recipes;
-        private PreparationResultDto _results;
+        private List<PreparationResultDto> _results;
 
-        public FoodCreatorService(IIngredientService incredientService, IRecipeService recipeService)
-        {
-            _recipeService = recipeService;
-            _incredientService= incredientService;
-        }
-        public async Task<PreparationResultDto> PrepareFoodAsync(List<IngredientDto> incredientProvided)
+        public async Task<List<PreparationResultDto>> PrepareFoodAsync(List<IngredientDto> incredientProvided)
         {
             _recipes = await _recipeService.GetAllAsync();
             int numberOfIngredients = 0;
             var orderedRecipeList = _recipes.OrderByDescending(x => x.Servings).ToList();
-            _results= new PreparationResultDto();
+            _results= new List<PreparationResultDto>();
+            PreparationResultDto result = null;
+
+            //start with recipe that feeds most people
             foreach (var recipe in orderedRecipeList)
             {
                 List<IngredientDto> recipeIngredients = new List<IngredientDto>();
                 foreach (var incredient in incredientProvided)
                 {
-                    bool isAvailable = CheckIncredient(recipe, incredient);
+                    bool isAvailable = CheckIncredient(recipe, incredient); //check if ingredient is available
                     if (isAvailable)
                     {
                         recipeIngredients.Add(incredient);
                         numberOfIngredients++;
                     }
                 }
-                int numberOfDishesMade = 0;
-                if (numberOfIngredients == recipe.Ingredients.Count)
-                    MakeFood(recipe, incredientProvided, ref numberOfDishesMade);
 
-                //   Console.WriteLine($"{recipe.Name}X{numberOfDishesMade} can be made from the provided ingredients in order to feed {recipe.Servings * numberOfDishesMade} people/person");
-                numberOfIngredients = 0;
+                int numberOfDishesMade = 0;
+                if (numberOfIngredients == recipe.Ingredients.Count) // if the required qty of ingredients is available then make food
+                {
+                     result =   MakeFood(recipe, incredientProvided, ref numberOfDishesMade);
+                  
+                    _results.Add(result);
+                }
+                 numberOfIngredients = 0;
             }
 
             return _results;
@@ -79,7 +79,7 @@ namespace MetroFibre.RecipeApp.Services.FoodCreator
             }
             return isAvailable;
         }
-        private bool IsThereARecipeThatUsesLessOfIt(IngredientDto ingredient, int currentQty, out RecipeDto recipe)
+        private bool IsThereAnotherRecipeThatUsesLessOfIt(IngredientDto ingredient, int currentQty, out RecipeDto recipe)
         {
             bool isAvailable = false;
             recipe = null;
@@ -94,7 +94,7 @@ namespace MetroFibre.RecipeApp.Services.FoodCreator
 
             return isAvailable;
         }
-        private int MakeFood(RecipeDto recipe, List<IngredientDto> incredients, ref int numberOfDishesMade)
+        private PreparationResultDto MakeFood(RecipeDto recipe, List<IngredientDto> incredients, ref int numberOfDishesMade)
         {
             int numberOfIngredientsAvailable = 0;
             bool moreCanBeMade = true;
@@ -102,11 +102,13 @@ namespace MetroFibre.RecipeApp.Services.FoodCreator
             {
                 foreach (var ingredient in incredients)
                 {
-                    bool isAvailable = IsThereARecipeThatUsesLessOfIt(ingredient, ingredient.Quantity, out RecipeDto rec);
-                    if (isAvailable && rec.Servings == recipe.Servings && rec.Name.ToLower() != recipe.Name.ToLower())
+                    bool isAvailable = IsThereAnotherRecipeThatUsesLessOfIt(ingredient, ingredient.Quantity, out RecipeDto alternativeRecipe);
+
+                    if (isAvailable && alternativeRecipe.Servings == recipe.Servings && alternativeRecipe.Name.ToLower() != recipe.Name.ToLower()
+                        && CheckIngredientAvailability(alternativeRecipe, incredients))
                     {
                         numberOfIngredientsAvailable = 0;
-                        return MakeFood(rec, incredients, ref numberOfIngredientsAvailable);
+                        return MakeFood(alternativeRecipe, incredients, ref numberOfIngredientsAvailable);
                     }
 
                     if (ingredient.Quantity > 0)
@@ -140,9 +142,14 @@ namespace MetroFibre.RecipeApp.Services.FoodCreator
                 if (CheckIngredientAvailability(recipe, incredients))
                     return MakeFood(recipe, incredients, ref numberOfDishesMade);
             }
-            _results.Results += $"{recipe.Name} X {numberOfDishesMade} can be made from the provided ingredients in order to feed {recipe.Servings * numberOfDishesMade} people/person\n";
 
-            return numberOfDishesMade;
+           int dishes= numberOfDishesMade;
+            return new PreparationResultDto {
+
+                Servings= recipe.Servings,
+                Recipe=recipe.Name,
+                Qty= dishes
+            };
         }
     }
 }

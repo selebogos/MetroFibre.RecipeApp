@@ -8,6 +8,8 @@ namespace MetroFibre.RecipeApp.Services.DTOs
 {
     public class PreparationResultDto
     {
-        public string Results { get; set; }
+        public string Recipe { get; set; }
+        public int Qty { get; set; }
+        public int Servings { get; set; }
     }
 }
