@@ -3,7 +3,7 @@
 #Please Install .NET8 
 #Please use Visual Studio
 
-# You can display the results using the Console
+# You can display the results using the Console And/Or Angular
 
 #To display the results using the console app, Run both  API (Found in the Backend Folder) and Console App(Found in the front end folder)
 The angular app is done using Angular 18 and runs on the default port. http://localhost:4200/
